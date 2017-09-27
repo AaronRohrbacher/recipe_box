@@ -1,0 +1,26 @@
+<h1><%= @recipe.recipe %></h1>
+
+<h3>Category:</h3>
+<% if @tag.any? %>
+  <% @tag.each do |tag| %>
+  <p><%=tag.tag%></p>
+  <%end%>
+<%else%>
+  <p>Add a tag, ya hag!</p>
+<%end%>
+
+
+<form action="/recipe/<%=@recipe.id%>" method="post">
+  <label for ='tag'>Add that tag:</label>
+  <input type = 'text' name ='tag'>
+  <button type='submit'>Tag!</button>
+</form>
+
+<h3>Ingredients:</h3>
+<% if @ingredients.any? %>
+  <% @ingredients.each do |ingredients| %>
+  <p><%=ingredients.ingredient%></p>
+  <%end%>
+<%else%>
+  <p>Come on, dingus! Put stuff in it.</p>
+<%end%>
