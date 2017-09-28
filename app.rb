@@ -97,3 +97,26 @@ post('/search_tag') do
   @search = true
   erb(:index)
 end
+
+post('/search_ingredient') do
+  arr = []
+  search_query = Ingredient.all.where(ingredient: params['search_ingredient'])
+
+  arr2 = []
+  search_query.each do |query|
+    arr2.push(query.id)
+  end
+
+query = Book.all.where(ingredient_id: arr2)
+binding.pry
+# query = Book.all.where(ingredient_id: search_query.id)
+
+  query.each do |recipe|
+    arr.push(Recipe.find(recipe.recipe_id))
+  end
+  @recipes_sorted = arr
+  @tags = Tag.all
+  @recipes = arr
+  @search = true
+  erb(:index)
+end
