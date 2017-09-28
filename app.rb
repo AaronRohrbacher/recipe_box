@@ -5,14 +5,17 @@ require('pry')
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
+  @tags = Tag.all
   @recipes = Recipe.all
   erb(:index)
 end
 
 post('/') do
   recipe = params['recipe']
-  Recipe.create(recipe: recipe)
+  rating = params['rating']
+  Recipe.create(recipe: recipe, rating: rating)
   @recipes = Recipe.all
+  @tags = Tag.all
   erb(:index)
 end
 
@@ -71,4 +74,23 @@ post('/tag') do
   Tag.create(tag: tag)
   @tags = Tag.all
   erb(:tag)
+end
+
+get('/search_tag') do
+  @recipes = []
+  @tags = Tag.all
+  erb(:search)
+end
+
+post('/search_tag') do
+  arr = []
+  query = Book.all.where(tag_id: params['search_tag'])
+
+  query.each do |recipe|
+    arr.push(Recipe.find(recipe.recipe_id))
+
+  end
+  @recipes_sorted = arr
+  @tags = Tag.all
+  erb(:search)
 end
