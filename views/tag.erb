@@ -1,0 +1,16 @@
+<h2>Current Tags:</h2>
+
+<% if @tags.any? do %>
+  <% @tags.each do |tag|%>
+  <p><%= tag.tag%></p>
+  <% end %>
+  <% end %>
+  <% else %>
+  <p>You have no tags yet.</p>
+  <% end %>
+
+<form action="/tag" method="post">
+  <label for="tag">Enter a new tag</label>
+  <input type="text" name="tag">
+  <button type="submit">Anotha one</button>
+</form>

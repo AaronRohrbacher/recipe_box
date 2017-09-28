@@ -1,0 +1,14 @@
+<h3>Ingredients:</h3>
+<% if @ingredients.any? %>
+  <% @ingredients.each do |ingredients| %>
+  <p><%=ingredients.ingredient%></p>
+  <%end%>
+<%else%>
+  <p>Come on, dingus! Put stuff in it.</p>
+<%end%>
+
+<form action="/ingredient" method="post">
+  <label for ='ingredient'>Add that ingredient:</label>
+  <input type = 'text' name ='ingredient'>
+  <button type='submit'>Tag!</button>
+</form>
