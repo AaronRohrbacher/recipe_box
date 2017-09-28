@@ -16,7 +16,8 @@ end
 post('/') do
   recipe = params['recipe']
   rating = params['rating']
-  Recipe.create(recipe: recipe, rating: rating)
+  instructions = params['instructions']
+  Recipe.create(recipe: recipe, rating: rating, instructions: instructions)
   @recipes = Recipe.all
   @tags = Tag.all
   erb(:index)
@@ -100,7 +101,9 @@ end
 
 post('/search_ingredient') do
   arr = []
-  search_query = Ingredient.all.where(ingredient: params['search_ingredient'])
+  search_query = Ingredient.all.where("ingredient ILIKE (?)", "%#{params['search_ingredient']}%")
+
+  # search_query = Ingredient.all.where(:ingredient => params['search_ingredient'])
 
   arr2 = []
   search_query.each do |query|
@@ -108,7 +111,6 @@ post('/search_ingredient') do
   end
 
 query = Book.all.where(ingredient_id: arr2)
-binding.pry
 # query = Book.all.where(ingredient_id: search_query.id)
 
   query.each do |recipe|

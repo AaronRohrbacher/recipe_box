@@ -7,7 +7,7 @@
     <input type = "text" name = "search_ingredient">
     <button type ="submit">Submit</button>
   </form>
-  
+
   <form action="/search_tag" method="post">
     <label for="search_tag">Filter by recipe Tag: </label>
     <select name = 'search_tag'>
@@ -48,6 +48,8 @@
 <form action = '/' method = 'post'>
   <label for 'recipe'>Add a recipe:</label>
   <input type="text" name="recipe">
+  <label for 'instructions'>Add Instructions: </label>
+  <textarea name="instructions" cols="50" rows="5"></textarea>
   <label for="rating"></label>
   <select name="rating">
     <option value="1">⭐</option>
