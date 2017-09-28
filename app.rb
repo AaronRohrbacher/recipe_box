@@ -17,10 +17,14 @@ post('/') do
   recipe = params['recipe']
   rating = params['rating']
   instructions = params['instructions']
-  Recipe.create(recipe: recipe, rating: rating, instructions: instructions)
+  @recipe = Recipe.new(recipe: recipe, rating: rating, instructions: instructions)
   @recipes = Recipe.all
   @tags = Tag.all
+  if @recipe.save()
   erb(:index)
+  else
+  erb(:error)
+  end
 end
 
 get('/recipe/:id') do
