@@ -7,8 +7,8 @@
   <p>Come on, dingus! Put stuff in it.</p>
 <%end%>
 
-<form action="/ingredient" method="post">
+<form action="/recipe/<%=@recipe.id%>/ingredient" method="post">
   <label for ='ingredient'>Add that ingredient:</label>
   <input type = 'text' name ='ingredient'>
-  <button type='submit'>Tag!</button>
+  <button type='submit'>Add!</button>
 </form>

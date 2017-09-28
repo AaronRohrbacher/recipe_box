@@ -47,14 +47,17 @@ post('/recipe/:id/tag') do
 end
 
 get('/recipe/:id/ingredient') do
-  @ingredients = Ingredient.all
+  @recipe = Recipe.find(params['id'])
+  @ingredients = @recipe.ingredients
   erb(:ingredient)
 end
 
 post('/recipe/:id/ingredient') do
   ingredient = params['ingredient']
-  Ingredient.create(ingredient: ingredient)
-  @ingredients = Ingredient.all
+  @recipe = Recipe.find(params['id'])
+  new_ingredient = Ingredient.create(ingredient: ingredient)
+  @recipe.ingredients.push(new_ingredient)
+  @ingredients = @recipe.ingredients
   erb(:ingredient)
 end
 
