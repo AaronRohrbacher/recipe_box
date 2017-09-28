@@ -1,6 +1,31 @@
 <h1>Recipe Box</h1>
 <br>
+<!-- <h3>///////////////////</h3> -->
+  <h2>Search:</h2>
+  <form action="/search_tag" method="post">
+    <label for="search_tag">Filter by recipe Tag: </label>
+    <select name = 'search_tag'>
+      <%@tags.each do |tag|%>
+        <option value = "<%=tag.id%>"><%=tag.tag%></option>
+        <%end%>
+    </select>
+    <button type="submit">Search</button>
+  </form>
 
+<%if @search%>
+  <% if @recipes_sorted.any? %>
+    <h2>Here are your Found Recipes:</h2>
+
+    <% @recipes_sorted.each do |recipe| %>
+      <h3><a href="/recipe/<%= recipe.id %>"><%= recipe.recipe %><%= '⭐' * recipe.rating.to_i %></a></h3>
+    <% end %>
+
+    <% else %>
+      <h2>There are no Recipes yet!</h2>
+    <% end %>
+
+<!-- <h3>///////////////////</h3> -->
+  <%else%>
 <% if @recipes.any? %>
   <h2>Here are your Recipes:</h2>
 
@@ -11,8 +36,8 @@
   <% else %>
     <h2>There are no Recipes yet!</h2>
   <% end %>
+  <%end%>
 
-  <a href = "/search_tag">SEARCHSEARCHSEARCH</a>
 
 <form action = '/' method = 'post'>
   <label for 'recipe'>Add a recipe:</label>
